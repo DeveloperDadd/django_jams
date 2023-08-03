@@ -13,18 +13,18 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
     
-class user(models.Model):
+class User(models.Model):
     username = models.CharField(max_length=16)
     email = models.CharField(max_length=100)
 
     def __str__(self):
         return self.username
     
-class artist(models.Model):
+class Artist(models.Model):
     name = models.CharField(max_length=75)
 
     def __str__(self):
         return self.name
     
-class song_artist(models.Model):
+class Song_Artist(models.Model):
     song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
