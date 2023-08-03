@@ -50,3 +50,6 @@ class User_Playlist(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
 
+class User_Playlist_Songs(models.Model):
+    song_id = models.ForeignKey(Song, on_delete=models.CASCADE)
+    user_playlist_id = models.ForeignKey(User_Playlist, on_delete=models.CASCADE)
