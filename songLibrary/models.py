@@ -46,3 +46,7 @@ class Album_Songs(models.Model):
     album_id = models.ForeignKey(Album, on_delete=models.CASCADE)
     #### order ####
 
+class User_Playlist(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+
