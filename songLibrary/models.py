@@ -36,3 +36,7 @@ class Song_Artist(models.Model):
 
 class Album(models.Model):
     name = models.CharField(max_length=200)
+
+class Artist_Album(models.Model):
+    artist_id = models.ForeignKey(Artist, on_delete = models.CASCADE)
+    album_id = models.ForeignKey(Album, on_delete= CASCADE)
