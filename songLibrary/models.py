@@ -20,3 +20,11 @@ class user(models.Model):
     def __str__(self):
         return self.username
     
+class artist(models.Model):
+    name = models.CharField(max_length=75)
+
+    def __str__(self):
+        return self.name
+    
+class song_artist(models.Model):
+    song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
