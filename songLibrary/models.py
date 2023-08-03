@@ -39,4 +39,5 @@ class Album(models.Model):
 
 class Artist_Album(models.Model):
     artist_id = models.ForeignKey(Artist, on_delete = models.CASCADE)
-    album_id = models.ForeignKey(Album, on_delete= CASCADE)
+    album_id = models.ForeignKey(Album, on_delete= models.CASCADE)
+
