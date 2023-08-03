@@ -13,6 +13,10 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
     
+class Song_Genre(models.Model):
+    song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
+    genre_id = models.ForeignKey(Genre, on_delete= models.CASCADE)
+    
 class User(models.Model):
     username = models.CharField(max_length=16)
     email = models.CharField(max_length=100)
@@ -28,3 +32,4 @@ class Artist(models.Model):
     
 class Song_Artist(models.Model):
     song_id = models.ForeignKey(Song, on_delete = models.CASCADE)
+    artist_id = models.ForeignKey(Artist, on_delete= models.CASCADE)
