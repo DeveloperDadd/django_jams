@@ -41,3 +41,8 @@ class Artist_Album(models.Model):
     artist_id = models.ForeignKey(Artist, on_delete = models.CASCADE)
     album_id = models.ForeignKey(Album, on_delete= models.CASCADE)
 
+class Album_Songs(models.Model):
+    song_id = models.ForeignKey(Song, on_delete=models.CASCADE)
+    album_id = models.ForeignKey(Album, on_delete=models.CASCADE)
+    #### order ####
+
