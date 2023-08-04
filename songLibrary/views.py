@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
+# Decorators restrict access to views based on the request method (GET, POST, DELETE etc.)
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import SongSerializer, ArtistSerializer, UserSerializer
@@ -33,13 +34,14 @@ def songList(request):
     serializer = SongSerializer(songs, many=True)
     return Response(serializer.data)
 
+# This function takes all the artists and returns all of their song titles
 @api_view(['GET'])
 def artistDetail(request, pk):
     artists = Artist.objects.get(id=pk)
     serializer = ArtistSerializer(artists, many=False)
     return Response(serializer.data)
 
-#REST framework introduces a Request object that extends the regular HttpRequest
+# REST framework introduces a Request object that extends the regular HttpRequest
 # Core functionality is the request.data attribute, which is similar to request.POST
 
 @api_view(['GET'])
@@ -51,16 +53,16 @@ def getUsers(request):
 
 @api_view(['POST']) ## CREATE
 def createUser(request):
-    serializer = UserSerializer(data=request.data)
+    serializer = UserSerializer(data=request.data) #Creating an instance of UserSerializer, data being initialized with the data from the HTTP request method
     
-    if serializer.is_valid():
-        serializer.save()
+    if serializer.is_valid(): # This makes sure required fields are all there
+        serializer.save() # Once all the fields are retrieved, save it to the database
 
-    return Response(serializer.data)
+    return Response(serializer.data) 
 
 @api_view(['POST']) ## UPDATE
 def updateUser(request, pk):
-    user = User.objects.get(id=pk)
+    user = User.objects.get(id=pk) #Get the user id by the pk passed in as an argument
     serializer = UserSerializer(instance=user, many=False)
     
     if serializer.is_valid():
@@ -70,8 +72,8 @@ def updateUser(request, pk):
 
 @api_view(['DELETE'])
 def deleteUser(request, pk):
-    user = User.objects.get(id=pk)
+    user = User.objects.get(id=pk) # Get the user id and delete it from the database
     user.delete()
 
-    return Response(serializer.data)
+    return Response('User successfully deleted!')
 
