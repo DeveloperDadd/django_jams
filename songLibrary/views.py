@@ -15,6 +15,7 @@ def apiOverview(request):
         'artistdetail' : '/artist-list/<str:pk>', # Displays artist and their songs 
         'getUsers' : '/get-users/', # Displays all the users in the database
         'createUser' : '/create-user/', # Create a user
+        'updateUser' : '/update-user/', # Update user info
         'deleteUser' : '/delete-user/<str:pk>'
     }
 
@@ -56,5 +57,16 @@ def createUser(request):
         serializer.save()
 
     return Response(serializer.data)
+
+@api_view(['POST'])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(instance=user, many=False)
+    
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
 
 
