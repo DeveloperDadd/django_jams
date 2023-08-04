@@ -15,8 +15,8 @@ def apiOverview(request):
         'artistdetail' : '/artist-list/<str:pk>', # Displays artist and their songs 
         'getUsers' : '/get-users/', # Displays all the users in the database
         'createUser' : '/create-user/', # Create a user
-        'updateUser' : '/update-user/', # Update user info
-        'deleteUser' : '/delete-user/<str:pk>'
+        'updateUser' : '/update-user/<str:pk>', # Update user info
+        'deleteUser' : '/delete-user/<str:pk>',
     }
 
     return Response(api_urls)
@@ -49,7 +49,7 @@ def getUsers(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(['POST']) ## CREATE
 def createUser(request):
     serializer = UserSerializer(data=request.data)
     
@@ -58,7 +58,7 @@ def createUser(request):
 
     return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['POST']) ## UPDATE
 def updateUser(request, pk):
     user = User.objects.get(id=pk)
     serializer = UserSerializer(instance=user, many=False)
@@ -68,5 +68,10 @@ def updateUser(request, pk):
 
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+def deleteUser(request, pk):
+    user = User.objects.get(id=pk)
+    user.delete()
 
+    return Response(serializer.data)
 
